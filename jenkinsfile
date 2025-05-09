@@ -10,7 +10,7 @@ pipeline {
         // Stage 1: Clone Repository
         stage('Clone Code') {
             steps {
-                git branch: 'pjct',
+                git branch: 'dev',
                      url: 'https://github.com/SASowah/JavaCalculatorPrivate.git'
             }
         }
