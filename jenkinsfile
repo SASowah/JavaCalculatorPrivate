@@ -55,7 +55,7 @@ pipeline {
         }
         failure {
             echo "Pipeline failed! Check logs for errors."
-            mail to: 'team@example.com',
+            mail to: 'samsoo18@yahoo.com',
                  subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                  body: "Check build ${env.BUILD_URL}"
         }
