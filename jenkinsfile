@@ -27,8 +27,7 @@ pipeline {
             steps {
                 script {
                     // Build with both latest and build number tags
-                    docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
-                    docker.tag("${DOCKER_IMAGE}:${env.BUILD_NUMBER}", "${DOCKER_IMAGE}:latest")
+                    sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_NUMBER} -t ${DOCKER_IMAGE}:latest ."
                 }
             }
         }
@@ -37,9 +36,9 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
-                        docker.push("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
-                        docker.push("${DOCKER_IMAGE}:latest")
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID)
+                       sh "docker.push ${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
+                        sh "docker.push ${DOCKER_IMAGE}:latest"
                     }
                 }
             }
